@@ -2,7 +2,7 @@ import UIKit
 import Vision
 
 enum ImageDetectorState {
-    case detectionStarted, detectionFailed, detectionResultReceived(result: DogBreedDetectionModel)
+    case detectionStarted, detectionFailed, detectionResultReceived(results: [DogBreedDetectionModel])
 }
 
 final class ImageDetectorService {
@@ -47,16 +47,22 @@ final class ImageDetectorService {
     
     private func handleRequestResults(_ results: [Any]?) {
         guard let results = results as? [VNClassificationObservation],
-              let firstResult = results.first else {
-            print("Cannot observe detetion result")
+              results.count > 0 else {
+            print("Cannot observe detetion results")
             self.detectionCallback?(.detectionFailed)
             return
         }
         
         DispatchQueue.main.async { [weak self] in
-            let cactusResultModel =  DogBreedDetectionModel(identifier: firstResult.identifier,
-                                                          confidence: firstResult.confidence)
-            self?.detectionCallback?(.detectionResultReceived(result: cactusResultModel))
+            
+            var detectionResults = [DogBreedDetectionModel]()
+            
+            for result in results {
+                if result.confidence > 0.1 {
+                    detectionResults.append(DogBreedDetectionModel(identifier: result.identifier, confidence: result.confidence))
+                }
+            }
+            self?.detectionCallback?(.detectionResultReceived(results: detectionResults))
         }
     }
 }

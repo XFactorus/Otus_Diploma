@@ -11,7 +11,8 @@ import SwiftUI
 struct DogsBreedDetectorApp: App {
     var body: some Scene {
         WindowGroup {
-            BreedCheckerView(viewModel: BreedCheckerViewModel())
+            BreedDetectorView()
+                .environmentObject(BreedCheckerViewModel())
         }
     }
 }

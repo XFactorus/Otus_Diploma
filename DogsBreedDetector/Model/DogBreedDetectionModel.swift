@@ -16,7 +16,9 @@ class DogBreedDetectionModel {
     func getDogBreed() -> String {
         return identifier
     }
-//    func isCactus() -> Bool {
-//        return self.identifier == "cactus"
-//    }
+    
+    func getFriendlyDogBreed() -> String {
+        let friendlyName = identifier.replacingOccurrences(of: "_", with: " ").capitalized
+        return friendlyName
+    }
 }
