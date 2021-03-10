@@ -19,33 +19,35 @@ struct BreedDetectorView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Image(uiImage: viewModel.loadDogImage())
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                if inputImage == nil {
-                    Text("Load dog's image to start")
-                        .padding()
-                }
-                Spacer()
-                HStack {
-                    Button("Get from library") {
-                        self.showingImagePicker = true
-                        self.isCameraSelected = false
-                    }.padding()
+                VStack {
+                    Image(uiImage: viewModel.loadDogImage())
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                    if inputImage == nil {
+                        Text("Load dog's image to start")
+                            .padding()
+                    }
                     Spacer()
-                    Button("Take photo") {
-                        self.showingImagePicker = true
-                        self.isCameraSelected = true
-                    }.padding()
-                }.padding()
-                
+                    HStack {
+                        Button("Photo from library") {
+                            self.showingImagePicker = true
+                            self.isCameraSelected = false
+                        }.padding()
+                        Spacer()
+                        Button("Take a photo") {
+                            self.showingImagePicker = true
+                            self.isCameraSelected = true
+                        }.padding()
+                    }
+                }
+    
                 if self.viewModel.dogDetected {
                     Text("Dog detected!\n We are \(self.viewModel.getMainPercent())% sure it's \(self.viewModel.getMainDogBreed())")
                         .padding()
                         .multilineTextAlignment(.center)
                     
                     NavigationLink(destination: ListResultsView()) {
-                        Text("See other results")
+                        Text("See all results")
                     }
                 }
                 else if self.viewModel.dogDetectionFailed {
@@ -58,12 +60,13 @@ struct BreedDetectorView: View {
                         Button("Check dog's breed!") {
                             self.viewModel.checkBreed()
                         }
-                        Spacer()
+//                        Spacer()
                     }
                 }
             }
-            .navigationTitle("Breed detector")
+            .navigationBarTitle("Breed detector", displayMode: .inline)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .padding([.horizontal, .bottom])
         .sheet(isPresented: $showingImagePicker, onDismiss: loadImage) {
             ImagePicker(image: self.$inputImage, isCamera: self.isCameraSelected)

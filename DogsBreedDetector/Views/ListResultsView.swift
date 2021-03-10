@@ -11,7 +11,17 @@ struct ListResultsView: View {
     @EnvironmentObject var detectorViewModel: BreedCheckerViewModel
     
     var body: some View {
-        Text("Dogs found: \(detectorViewModel.detectedDogsList.count)")
+        List(self.detectorViewModel.detectedDogsList) { dog in
+            NavigationLink(destination: DogDetailsView()) {
+                HStack {
+                    Text(dog.dogName)
+                    Spacer()
+                    Text("Accuracy: \(dog.detectionPercent)%")
+                }
+            }
+        }
+        .navigationBarTitle("Detection results", displayMode: .inline)
+        Text("Possible dogs detected: \(detectorViewModel.detectedDogsList.count)")
     }
 }
 

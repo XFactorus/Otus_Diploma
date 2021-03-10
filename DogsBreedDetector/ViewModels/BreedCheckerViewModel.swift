@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct Dog {
+struct Dog: Identifiable {
+    var id: String
     var dogName: String
     var detectionPercent: Int
 }
@@ -24,13 +25,7 @@ final class BreedCheckerViewModel: ObservableObject {
     init() {
         subsribeDetectorUpdates()
     }
-    
-    public func refreshModel() {
-        detectedDogsList = [Dog]()
-        loadedDogImage = nil
-        dogDetected = false
-    }
-    
+        
     func loadImageFromLibrary() {
         print("Load image from library pressed")
     }
@@ -46,6 +41,13 @@ final class BreedCheckerViewModel: ObservableObject {
         }
         
         self.imageDetectorService.detectImageType(dogImage)
+    }
+    
+    private func refreshModel() {
+        detectedDogsList = [Dog]()
+        loadedDogImage = nil
+        dogDetected = false
+        dogDetectionFailed = false
     }
     
     func loadDogImage() -> UIImage {
@@ -88,7 +90,7 @@ final class BreedCheckerViewModel: ObservableObject {
     private func setDogsResult(_ detectionResults: [DogBreedDetectionModel]) {
         detectedDogsList = [Dog]()
         for result in detectionResults {
-            let dog = Dog(dogName: result.getFriendlyDogBreed(), detectionPercent: result.getPercentConfidence())
+            let dog = Dog(id:result.getDogBreed(), dogName: result.getFriendlyDogBreed(), detectionPercent: result.getPercentConfidence())
             detectedDogsList.append(dog)
         }
     }
