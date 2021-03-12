@@ -8,13 +8,31 @@
 import SwiftUI
 
 struct DogDetailsView: View {
+    
+    @ObservedObject var dogDetailsViewModel:DogDetailsViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            if dogDetailsViewModel.breedInfo == nil {
+                Text("Loading dog details...")
+            } else {
+                Text(dogDetailsViewModel.breedInfo!.name)
+                    .font(.title)
+                    .fontWeight(.bold)
+                
+                DogDetailsListView(breedInfo: dogDetailsViewModel.breedInfo!)
+            }
+        }
+        .onAppear {
+            dogDetailsViewModel.loadBreedDetails()
+        }
     }
 }
 
 struct DogDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        DogDetailsView()
+        Group {
+            DogDetailsView(dogDetailsViewModel: DogDetailsViewModel(breedName: "poodle"))
+        }
     }
 }

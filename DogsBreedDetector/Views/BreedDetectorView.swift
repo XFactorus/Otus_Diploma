@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BreedDetectorView: View {
     
-    @EnvironmentObject var viewModel: BreedCheckerViewModel
+    @EnvironmentObject var viewModel: BreedDetectorViewModel
 
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
@@ -64,7 +64,7 @@ struct BreedDetectorView: View {
                     }
                 }
             }
-            .navigationBarTitle("Breed detector", displayMode: .inline)
+            .navigationTitle("Breed Detector")
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .padding([.horizontal, .bottom])
@@ -83,6 +83,6 @@ struct BreedDetectorView: View {
 
 struct MainViewPreviews: PreviewProvider {
     static var previews: some View {
-        BreedDetectorView().environmentObject(BreedCheckerViewModel())
+        BreedDetectorView().environmentObject(BreedDetectorViewModel())
     }
 }

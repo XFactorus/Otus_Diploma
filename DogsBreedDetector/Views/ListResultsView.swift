@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ListResultsView: View {
-    @EnvironmentObject var detectorViewModel: BreedCheckerViewModel
+    @EnvironmentObject var detectorViewModel: BreedDetectorViewModel
     
     var body: some View {
         List(self.detectorViewModel.detectedDogsList) { dog in
-            NavigationLink(destination: DogDetailsView()) {
+            NavigationLink(destination: DogDetailsView(dogDetailsViewModel: DogDetailsViewModel(breedName: dog.dogName))) {
                 HStack {
                     Text(dog.dogName)
                     Spacer()
@@ -20,7 +20,7 @@ struct ListResultsView: View {
                 }
             }
         }
-        .navigationBarTitle("Detection results", displayMode: .inline)
+        .navigationTitle("Detection Results")
         Text("Possible dogs detected: \(detectorViewModel.detectedDogsList.count)")
     }
 }

@@ -1,5 +1,5 @@
 //
-//  BreedCheckerViewModel.swift
+//  BreedDetectorViewModel.swift
 //  DogsBreedDetector
 //
 //  Created by Vladyslav Pokryshka
@@ -13,7 +13,7 @@ struct Dog: Identifiable {
     var detectionPercent: Int
 }
 
-final class BreedCheckerViewModel: ObservableObject {
+final class BreedDetectorViewModel: ObservableObject {
     
     @Published var loadedDogImage: UIImage?
     @Published public var dogDetected: Bool = false
