@@ -66,6 +66,16 @@ extension DogApi: EndPointType {
     }
     
     var headers: HTTPHeaders? {
-        return ["x-api-key":"9be3b836-5777-411f-a4c5-6e1da15b278e"]
+        return ["x-api-key":self.getApiKey() ?? ""]
+    }
+    
+    private func getApiKey() -> String? {
+        guard let path = Bundle.main.path(forResource: "Keys", ofType: "plist"),
+              let keys = NSDictionary(contentsOfFile: path) else  {
+            return nil
+        }
+        
+        let apiKey = keys["DogApiKey"] as? String
+        return apiKey
     }
 }
