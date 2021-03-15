@@ -15,7 +15,7 @@ Once info received once, info will be stored locally on your device and will not
 
 ## Install
 1. Clone the project and launch the DogsBreedDetector.xcodeproj project file
-2. Add Keys.plist file to the project, with the DogApiKey string key set to your API key from https://thedogapi.com/
+2. Add Keys.plist file to the project, with the *"DogApiKey"* string key set to your API key from https://thedogapi.com/
 3.  Build and run the project. All required dependices will be connected automatically.
 
 ### References
