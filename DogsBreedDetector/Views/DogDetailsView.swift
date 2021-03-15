@@ -14,7 +14,11 @@ struct DogDetailsView: View {
     var body: some View {
         VStack {
             if dogDetailsViewModel.breedInfo == nil {
-                Text("Loading dog details...")
+                if dogDetailsViewModel.breedInfoFailed {
+                    Text("Sorry, cannot load info about this breed")
+                } else {
+                    Text("Loading dog details...")
+                }
             } else {
                 Text(dogDetailsViewModel.breedInfo!.name)
                     .font(.title)

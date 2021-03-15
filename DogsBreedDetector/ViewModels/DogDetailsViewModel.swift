@@ -15,6 +15,7 @@ final class DogDetailsViewModel: ObservableObject {
     private var loaderService: LoaderService? = DogInfoLibraryServiceLocator.service()
     
     @Published public var breedInfo: BreedInfo?
+    @Published public var breedInfoFailed: Bool = false
     
     init(breedName: String) {
         self.breedName = breedName
@@ -22,17 +23,13 @@ final class DogDetailsViewModel: ObservableObject {
     
     func loadBreedDetails() {
         getBreedData()
-//        if !initialInfoLoaded {
-//            initialInfoLoaded.toggle()
-//            loadDbData()
-//            fetchPage()
-//        }
     }
     
     private func getBreedData() {
         loaderService?.loadDbDogBreed(breedName, completion: { (breedInfo, errorText) in
             guard let breedInfo = breedInfo, errorText == nil else {
                 print(errorText ?? "Empty character")
+                self.breedInfoFailed = true
                 return
             }
             self.breedInfo = breedInfo
