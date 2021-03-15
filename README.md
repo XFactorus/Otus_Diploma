@@ -20,5 +20,5 @@ Once info received once, info will be stored locally on your device and will not
 
 ### References
 - **Stanford Dogs Dataset**. Available at: http://vision.stanford.edu/aditya86/ImageNetDogs/
-- **Tsinghua Dogs Datasett**. Available at: https://cg.cs.tsinghua.edu.cn/ThuDogs/
+- **Tsinghua Dogs Dataset**. Available at: https://cg.cs.tsinghua.edu.cn/ThuDogs/
 - **The Dog API**. Available at: https://thedogapi.com/
