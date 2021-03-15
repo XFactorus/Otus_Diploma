@@ -62,7 +62,13 @@ final class ImageDetectorService {
                     detectionResults.append(DogBreedDetectionModel(identifier: result.identifier, confidence: result.confidence))
                 }
             }
-            self?.detectionCallback?(.detectionResultReceived(results: detectionResults))
+            
+            if detectionResults.count > 0 {
+                self?.detectionCallback?(.detectionResultReceived(results: detectionResults))
+            } else {
+                print("No detection results")
+                self?.detectionCallback?(.detectionFailed)
+            }
         }
     }
 }

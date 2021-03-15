@@ -51,7 +51,7 @@ struct BreedDetectorView: View {
                     }
                 }
                 else if self.viewModel.dogDetectionFailed {
-                    Text("Sorry, but we cannot recognize this dog. Try Another photo!")
+                    Text("Sorry, but we cannot recognize this dog.\n Try Another photo!")
                         .padding()
                         .multilineTextAlignment(.center)
                 }
