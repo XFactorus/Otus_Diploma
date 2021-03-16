@@ -1,3 +1,3 @@
-# TVShowsLibrary
+# DogsInfoLibrary
 
-A description of this package.
+DogsInfoLibrary Swift Package, used to manage all network tasks for https://thedogapi.com/ API
